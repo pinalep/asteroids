@@ -32,6 +32,7 @@ def main():
     score = 0
     highest_score = 0
     game_over = False
+    timer = 0
 
     while True:
         log_state()
@@ -52,10 +53,12 @@ def main():
                     player.velocity = pygame.Vector2(0, 0)
 
                     score = 0
+                    timer = 0
                     game_over = False
 
             
         screen.fill("black")
+
         if game_over == False:
             for item in drawable:
                 item.draw(screen)
@@ -82,6 +85,9 @@ def main():
             screen.blit(score_text, (10, 10))
             highest_score_text = font.render(f"Highest score: {highest_score}", True, "white")
             screen.blit(highest_score_text, (10, 50))
+            timer = timer + dt
+            timer_text = font.render(f"Time: {int(timer)}", True, "white")
+            screen.blit(timer_text, (SCREEN_WIDTH - timer_text.get_width() - 10, 10))
 
 
         if game_over == True:
